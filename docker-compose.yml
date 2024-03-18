@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./app   # Path to the directory containing the Dockerfile
+      dockerfile: Dockerfile   # Name of the Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./app/pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
+    depends_on:
+      - database
+
+  database:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: filmoteka
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+

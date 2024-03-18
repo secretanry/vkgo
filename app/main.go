@@ -75,7 +75,7 @@ type sort struct {
 
 func main() {
 	logger := log.New(os.Stdout, "HTTP: ", log.Ldate|log.Ltime)
-	db := initDatabase("postgres", "2271799", "localhost:5433", "filmoteka")
+	db := initDatabase("postgres", "postgres", "database:5432", "filmoteka")
 
 	defer func(db *sql.DB) {
 		err := db.Close()
